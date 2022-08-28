@@ -107,20 +107,19 @@ public class GraphAdjacentList implements Graph {
             temp = vertices.get(i); 
             
             //Si son iguales extraeremos su numero para eliminarlo
-            if (vertex == vertices.get(i).data) {
+            if (vertex == vertices.get(i).data) 
             	num = i; 
             
             //Quitamos las aristas adjacentes al vertice
             for (int j = 0; j < temp.adjacentVertices.size(); j++) {
                 if (vertex == temp.adjacentVertices.get(j).data) 
                     temp.removeAdjacentVertex(vertex);
-                }
-            vertices.remove(num); //Finalmente Quitamos el vertice
-            this.numVertices--;
-            return true;
             }
         }
-        return false;
+        
+        vertices.remove(num); //Finalmente Quitamos el vertice
+        this.numVertices--;
+        return true;
     }
     public ArrayList<Vertex> depthFirstSearch(Vertex n, ArrayList<Vertex> visited) {
         visited.add(n);
