@@ -86,7 +86,7 @@ public class GraphMatrix implements Graph {
         	 ArrayList<Integer> visitados = depthFirstSearch(vertices.get(0));
         	 for(int j = 0; j<visitados.size(); j++) 
                  //Se borraran los vertices ya visitados
- 	    		vertices.remove(j);
+ 	    		vertices.remove(0);
             cont++;
         }
         return cont;
