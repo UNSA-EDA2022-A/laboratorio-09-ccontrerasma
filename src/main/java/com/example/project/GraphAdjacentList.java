@@ -86,11 +86,55 @@ public class GraphAdjacentList implements Graph {
     }
 
     public int countConnectedComponents(){
-        return -1;
+    	
+    	ArrayList <Vertex> visitados = new ArrayList<Vertex>();
+    	int cont = 0;
+        for(Vertex v : vertices){
+        	if (!visitados.contains(v)) {
+        		//Se marcaran los vertces ya visitados
+        		depthFirstSearch(v, visitados);
+                //Y se sumara el contador
+                 cont++;
+             }
+         }
+         return cont;
     }
 
     public boolean removeVertex(int vertex){
+    	int num = 0;
+    	Vertex temp = null;
+        for (int i = 0; i < vertices.size(); i++) { //Buscamos el vertice
+            temp = vertices.get(i); 
+            
+            //Si son iguales extraeremos su numero para eliminarlo
+            if (vertex == vertices.get(i).data) {
+            	num = i; 
+            
+            //Quitamos las aristas adjacentes al vertice
+            for (int j = 0; j < temp.adjacentVertices.size(); j++) {
+                if (vertex == temp.adjacentVertices.get(j).data) 
+                    temp.removeAdjacentVertex(vertex);
+                }
+            vertices.remove(num); //Finalmente Quitamos el vertice
+            this.numVertices--;
+            return true;
+            }
+        }
         return false;
+    }
+    public ArrayList<Vertex> depthFirstSearch(Vertex n, ArrayList<Vertex> visited) {
+        visited.add(n);
+        for (Vertex vertex : n.adjacentVertices) { 
+            if (!vertices.contains(vertex)) {
+                depthFirstSearch(n, visited); 
+            }
+        }
+        return visited;
+    }
+    
+    public ArrayList<Vertex> depthFirstSearch(Vertex n) {
+    	
+        return this.depthFirstSearch(n, new ArrayList<Vertex>());
     }
 
     public static void main(String args[]) {
