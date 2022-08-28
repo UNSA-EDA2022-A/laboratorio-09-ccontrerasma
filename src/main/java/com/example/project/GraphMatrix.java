@@ -78,8 +78,17 @@ public class GraphMatrix implements Graph {
     }
 
     public int countConnectedComponents() {
-
-        return -1;
+    	ArrayList<Integer> vertices=new ArrayList<Integer>();
+    	int cont=0;
+        for(int i=0;i<numVertices;i++){
+            vertices.add(i);}
+        while(vertices.size()>0){
+        	 ArrayList<Integer> visitados = depthFirstSearch(vertices.get(0));
+        	 for(int j = 0; j<visitados.size(); j++) 
+ 	    		vertices.remove(0);
+            cont++;
+        }
+        return cont;
     }
 
     public static void main(String args[]) {
@@ -95,6 +104,7 @@ public class GraphMatrix implements Graph {
         System.out.println(graph);
         System.out.println("DFS:");
         System.out.println(graph.depthFirstSearch(0));
+        graph.countConnectedComponents();
     }
 
 }
